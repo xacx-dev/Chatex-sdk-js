@@ -1,12 +1,31 @@
 import {Advert} from "../exchange/fiat/advert";
 
-export interface seller_details {
+export interface seller_details extends details {
+}
+
+export interface details {
     recipient: string
 }
+
 export interface buyer_details {
     payment_details: string
 }
 
+export type queryAcceptTrade = {
+    "details": details | undefined,
+    "second_factor": second_factor,
+    "is_consented": boolean | true | undefined
+}
+
+export type queryReason = {
+    "reason": string,
+}
+
+
+export interface second_factor {
+    "mode": string | "PIN",
+    "code": string | number
+}
 
 export interface Label {
     "name": string,
@@ -60,9 +79,8 @@ export enum statusesExampleList {
 }
 
 
-
 export type queryMyTradeList = {
-    advert_id: number ,
+    advert_id: number,
     pair: string | PairExampleList,
     statuses: string | statusesExampleList
     date_start: Date,
