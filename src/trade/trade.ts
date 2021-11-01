@@ -7,6 +7,7 @@ export interface buyer_details {
     payment_details: string
 }
 
+
 export interface Label {
     "name": string,
     "view": string,
@@ -59,8 +60,9 @@ export enum statusesExampleList {
 }
 
 
+
 export type queryMyTradeList = {
-    advert_id: number,
+    advert_id: number ,
     pair: string | PairExampleList,
     statuses: string | statusesExampleList
     date_start: Date,
