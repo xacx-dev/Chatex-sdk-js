@@ -1,71 +1,71 @@
-import {Advert} from "../exchange/fiat/advert";
+import {Advert} from '../exchange/fiat/advert';
 
-export interface seller_details extends details {
+export interface SellerDetails extends Details {
 }
 
-export interface details {
+export interface Details {
     recipient: string
 }
 
-export interface buyer_details {
+export interface BuyerDetails {
     payment_details: string
 }
 
-export type queryAcceptTrade = {
-    "details": details | undefined,
-    "second_factor": second_factor,
-    "is_consented": boolean | true | undefined
+export type PayloadAcceptTrade = {
+    details?: Details,
+    second_factor: SecondFactor,
+    is_consented?: boolean | true
 }
 
-export type queryReason = {
-    "reason": string,
+export type PayloadReason = {
+    reason: string,
 }
 
 
-export interface second_factor {
-    "mode": string | "PIN",
-    "code": string | number
+export interface SecondFactor {
+    mode: string | 'PIN',
+    code: string | number
 }
 
 export interface Label {
-    "name": string,
-    "view": string,
-    "title": string,
-    "description": string
+    name: string,
+    view: string,
+    title: string,
+    description: string
 }
 
-export interface replier {
-    "login": string,
-    "count_of_completed_deals": number,
-    "count_of_likes": number,
-    "count_of_dislikes": number,
-    "count_of_blocks": number,
-    "trade_volume_tier": string,
-    "is_newbie": boolean,
-    "labels": Label[]
+export interface Replier {
+    login: string,
+    count_of_completed_deals: number,
+    count_of_likes: number,
+    count_of_dislikes: number,
+    count_of_blocks: number,
+    trade_volume_tier: string,
+    is_newbie: boolean,
+    labels: Label[]
 }
 
-export interface responseMyTradeList {
-    "id": number,
-    "status": string,
-    "cancelation_reason": string,
-    "advert": Advert,
-    "replier": replier,
-    "amount": string | number,
-    "fiat_amount": string | number,
-    "seller_details": seller_details,
-    "buyer_details": buyer_details,
-    "created_at": Date,
-    "expires_at": Date,
-    "accepted_at": Date,
-    "paid_at": Date,
-    "disputed_at": Date,
-    "completed_at": Date,
-    "canceled_at": Date,
-    "fee": string | number,
-    "invoice_id": string,
-    "trade_message_count": number,
-    "dispute_message_count": number,
+export interface ResponseMyTradeList {
+    id: number,
+    status: string,
+    cancelation_reason: string,
+    advert: Advert,
+    replier: Replier,
+    amount: string | number,
+    fiat_amount: string | number,
+    seller_details: SellerDetails,
+    buyer_details: BuyerDetails,
+    created_at: Date,
+    expires_at: Date,
+    accepted_at: Date,
+    paid_at: Date,
+    disputed_at: Date,
+    completed_at: Date,
+    canceled_at: Date,
+    fee: string | number,
+    invoice_id: string,
+    trade_message_count: number,
+    dispute_message_count: number,
 }
 
 export enum PairExampleList {
@@ -73,16 +73,16 @@ export enum PairExampleList {
     USD = 'USD',
 }
 
-export enum statusesExampleList {
+export enum StatusesExampleList {
     WAITING_FOR_REPLY = 'WAITING_FOR_REPLY',
     IN_PROGRESS = 'IN_PROGRESS'
 }
 
 
-export type queryMyTradeList = {
+export type QueryMyTradeList = {
     advert_id: number,
     pair: string | PairExampleList,
-    statuses: string | statusesExampleList
+    statuses: string | StatusesExampleList
     date_start: Date,
     date_end: Date,
     offset: number,

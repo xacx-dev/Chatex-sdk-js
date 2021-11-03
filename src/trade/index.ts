@@ -1,21 +1,28 @@
-import {getMyTradeList} from "./get-mytradelist";
-import {getTradeById} from "./getTradeById";
-import {acceptTrade} from "./AcceptTrade";
-import {declineTrade} from "./DeclineTrade";
-import {cancelTrade} from "./CancelTrade";
-import {details, markAsPaidTrade} from "./MarkAsPaidTrade";
-import {releaseTrade} from "./ReleaseTrade";
-import {getTradeCancelationReasons} from "./getTradeCancelationReasons";
-import {queryAcceptTrade, queryReason, queryMyTradeList, responseMyTradeList, second_factor} from "./trade"
+import {getMyTradeList} from "./get-my-trade-list";
+import {getTradeById} from "./get-trade-by-id";
+import {acceptTrade} from "./accept-trade";
+import {declineTrade} from "./decline-trade";
+import {cancelTrade} from "./cancel-trade";
+import {markAsPaidTrade} from "./mark-as-paid-trade";
+import {releaseTrade} from "./release-trade";
+import {getTradeCancelationReasons} from "./get-trade-cancelation-reasons";
+import {
+    PayloadAcceptTrade,
+    PayloadReason,
+    QueryMyTradeList,
+    ResponseMyTradeList,
+    SecondFactor,
+    BuyerDetails
+} from "./trade"
 
 export interface TradeModule {
-    getMyTradeList: (query: queryMyTradeList | undefined) => Promise<responseMyTradeList>;
-    getTradeById: (advert_id: number, trade_id: number) => Promise<responseMyTradeList>;
-    acceptTrade: (advert_id: number, trade_id: number, query: queryAcceptTrade) => Promise<responseMyTradeList>;
-    declineTrade: (advert_id: number, trade_id: number, query: queryReason | undefined) => Promise<responseMyTradeList>;
-    cancelTrade: (advert_id: number, trade_id: number, query: queryReason | undefined) => Promise<responseMyTradeList>;
-    markAsPaidTrade: (advert_id: number, trade_id: number, query: details | undefined) => Promise<responseMyTradeList>;
-    releaseTrade: (advert_id: number, trade_id: number, query: second_factor) => Promise<responseMyTradeList>;
+    getMyTradeList: (query?: QueryMyTradeList) => Promise<ResponseMyTradeList[]>;
+    getTradeById: (advertId: number, tradeId: number) => Promise<ResponseMyTradeList>;
+    acceptTrade: (advertId: number, tradeId: number, payload: PayloadAcceptTrade) => Promise<ResponseMyTradeList>;
+    declineTrade: (advertId: number, tradeId: number, payload?: PayloadReason) => Promise<ResponseMyTradeList>;
+    cancelTrade: (advertId: number, tradeId: number, payload?: PayloadReason) => Promise<ResponseMyTradeList>;
+    markAsPaidTrade: (advertId: number, tradeId: number, details?: BuyerDetails) => Promise<ResponseMyTradeList>;
+    releaseTrade: (advertId: number, tradeId: number, payload: SecondFactor) => Promise<ResponseMyTradeList>;
     getTradeCancelationReasons: () => Promise<string[]>;
 
 }
